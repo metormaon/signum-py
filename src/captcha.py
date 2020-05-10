@@ -47,10 +47,7 @@ def generate_captcha_challenge(image_root_folder: str = "captcha-images",
         x = index // 2 * 200
         y = index % 2 * 200
         w, h = img.size
-        print('pos {0},{1} size {2},{3}'.format(x, y, w, h))
         result.paste(img, (x, y, x + w, y + h))
-
-    # result.show()
 
     data = BytesIO()
     result.save(data, "JPEG")
