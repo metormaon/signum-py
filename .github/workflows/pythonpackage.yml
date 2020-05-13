@@ -14,7 +14,11 @@ jobs:
         python-version: [3.7]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -41,14 +45,12 @@ jobs:
     - name: Packaging
       run: |
         python setup.py sdist
-        sudo apt-get install tree
-        tree
 
     - name: Commit distribution
       uses: stefanzweifel/git-auto-commit-action@v4.1.6
       with:
         repository: .
-        file_pattern: dist/*
+        file_pattern: dist
         commit_message: "Github Action: distribution files"
         branch: ${{ github.ref }}
 
