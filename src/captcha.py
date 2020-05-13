@@ -8,6 +8,7 @@ from io import BytesIO
 from os.path import basename
 from typing import Dict, Set, Callable
 
+import inflect as inflect
 from PIL import Image
 
 
@@ -15,9 +16,28 @@ def require_singular(folder: str) -> Set[str]:
     return {folder}
 
 
+def allow_plural(folder: str) -> Set[str]:
+    return {folder, inflect.engine().plural(folder)}
+
+
 def generate_captcha_challenge(image_root_folder: str = "captcha-images",
                                solutions_for_folder: Callable[[str], Set[str]] = require_singular) -> (str, Set[str]):
-    folders = glob.glob(image_root_folder+"/*")
+    folders = glob.glob(image_root_folder + "/*")
+
+    if not folders:
+        raise ValueError("Bad or empty path: " + image_root_folder)
+
+    if len(folders) == 1:
+        raise ValueError("Root folder has only one subdirectory: " + image_root_folder)
+
+    for folder in folders:
+        file_count = 0
+
+        for extension in ["*.gif", "*.jpg", "*.jpeg", "*.png", "*.tiff", "*.bmp"]:
+            file_count += len(glob.glob1(folder, extension))
+
+        if file_count < 3:
+            raise ValueError("Not enough images in sub-directory " + folder)
 
     main_folder = secrets.choice(folders)
 

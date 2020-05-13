@@ -1,2 +1,2 @@
-Pillow
-
+Pillow~=7.1.2
+inflect~=4.1.0
