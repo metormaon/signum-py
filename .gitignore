@@ -133,3 +133,4 @@ dmypy.json
 .idea/signum-py.iml
 .idea/vcs.xml
 /google-images-download/google_images_download/
+/dist/

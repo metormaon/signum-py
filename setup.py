@@ -25,6 +25,7 @@ setup(
     package_dir={'signum': 'src'},
     packages=['signum'],
     package_data={'signum': extra_files},
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
