@@ -1,7 +1,19 @@
+import os
 from setuptools import setup
 
 with open('requirements.txt') as f:
     required = f.read().splitlines()
+
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+
+extra_files = package_files('catcha-images')
 
 setup(
     name="signum-py", # Replace with your own username
@@ -12,6 +24,7 @@ setup(
     url="https://github.com/metormaon/signum-py",
     package_dir={'signum': 'src'},
     packages=['signum'],
+    package_data={'signum': extra_files},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
