@@ -1,4 +1,7 @@
-from distutils.core import setup
+from setuptools import setup
+
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
 
 setup(
     name="signum-py", # Replace with your own username
@@ -13,5 +16,6 @@ setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ]
+    ],
+    install_requires=required
 )
