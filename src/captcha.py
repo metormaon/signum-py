@@ -21,7 +21,7 @@ def allow_plural(folder: str) -> Set[str]:
 
 
 def generate_captcha_challenge(image_root_folder: str = "captcha-images",
-                               solutions_for_folder: Callable[[str], Set[str]] = require_singular) -> (str, Set[str]):
+                               solutions_for_folder: Callable[[str], Set[str]] = allow_plural) -> (str, Set[str]):
     folders = glob.glob(image_root_folder + "/*")
 
     if not folders:

@@ -14,7 +14,8 @@ class TestCaptcha(TestCase):
 
     def test_generate_captcha_challenge(self):
         for _ in range(50):
-            url, solution = generate_captcha_challenge(self.test_resources_folder + "/test_captcha_images")
+            url, solution = generate_captcha_challenge(self.test_resources_folder + "/test_captcha_images",
+                                                       require_singular)
 
             with open(self.test_resources_folder + f"/captcha{next(iter(solution))}.data", "rt") as f:
                 actual_urls = f.read().splitlines()
