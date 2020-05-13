@@ -41,7 +41,7 @@ jobs:
     - name: Packaging
       run: |
         python setup.py sdist
-        apt-get install tree
+        sudo apt-get install tree
         tree
 
     - name: Commit distribution
