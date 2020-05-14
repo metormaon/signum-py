@@ -1,4 +1,4 @@
-import os
+
 from setuptools import setup
 
 with open('requirements.txt') as f:
@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
 
 
 setup(
-    name="signum-py", # Replace with your own username
+    name="signum-py",
     version="0.0.1",
     author="Moran Mahabi, Noam Rotem",
     author_email="moran.mahabi@gmail.com, metormaon@gmail.com",
