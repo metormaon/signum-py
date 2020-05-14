@@ -12,8 +12,8 @@ setup(
     author_email="moran.mahabi@gmail.com, metormaon@gmail.com",
     description="Sign-in tools for Python servers",
     url="https://github.com/metormaon/signum-py",
-    package_dir={'signum': 'src'},
-    packages=['signum'],
+    package_dir={'signum': 'src', 'captcha-images': 'captcha-images'},
+    packages=['signum', 'captcha-images'],
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
