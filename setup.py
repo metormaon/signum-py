@@ -14,7 +14,7 @@ setup(
     url="https://github.com/metormaon/signum-py",
     package_dir={'signum': 'src', 'captcha-images': 'captcha-images'},
     packages=['signum', 'captcha-images'],
-    package_data={'captcha-images': ['*']},
+    package_data={'': ['LICENSE']},
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
