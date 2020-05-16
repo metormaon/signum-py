@@ -1,2 +1,5 @@
 Pillow~=7.1.2
 inflect~=4.1.0
+cryptography~=2.9.2
+setuptools~=40.8.0
+schedule~=0.6.0
