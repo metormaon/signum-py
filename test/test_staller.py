@@ -49,7 +49,7 @@ class TestStaller(TestCase):
         elapsed: int = int((time.time() - start_time) * 1000)
         print(elapsed)
 
-        self.assertTrue(400 < elapsed < 500)
+        self.assertTrue(400 <= elapsed < 500)
         self.assertEqual(8, stallable.result)
         self.assertEqual((1, True), stallable.args)
         self.assertEqual({'pi': 3.4}, stallable.kwargs)
@@ -66,7 +66,7 @@ class TestStaller(TestCase):
         elapsed: int = int((time.time() - start_time) * 1000)
         print(elapsed)
 
-        self.assertTrue(1000 < elapsed < 1100)
+        self.assertTrue(1000 <= elapsed < 1100)
         self.assertEqual(8, stallable.result)
         self.assertEqual((1, True), stallable.args)
         self.assertEqual({'pi': 3.4}, stallable.kwargs)
@@ -83,7 +83,7 @@ class TestStaller(TestCase):
         elapsed: int = int((time.time() - start_time) * 1000)
         print(elapsed)
 
-        self.assertTrue(1000 < elapsed < 1100)
+        self.assertTrue(1000 <= elapsed < 1100)
         self.assertEqual(8, stallable.result)
         self.assertEqual((1, True), stallable.args)
         self.assertEqual({'pi': 3.4}, stallable.kwargs)
@@ -100,7 +100,7 @@ class TestStaller(TestCase):
         elapsed: int = int((time.time() - start_time) * 1000)
         print(elapsed)
 
-        self.assertTrue(400 < elapsed < 500)
+        self.assertTrue(400 <= elapsed < 500)
         self.assertEqual(0, stallable.result)
         self.assertEqual((1, True), stallable.args)
         self.assertEqual({'pi': 3.4}, stallable.kwargs)
@@ -117,7 +117,7 @@ class TestStaller(TestCase):
         elapsed: int = int((time.time() - start_time) * 1000)
         print(elapsed)
 
-        self.assertTrue(1000 < elapsed < 1100)
+        self.assertTrue(1000 <= elapsed < 1100)
         self.assertEqual(8, stallable.result)
         self.assertEqual((1, True), stallable.args)
         self.assertEqual({'pi': 3.4}, stallable.kwargs)
