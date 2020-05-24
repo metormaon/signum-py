@@ -1,6 +1,4 @@
 import time
-from datetime import datetime
-from timeit import timeit
 from typing import Any, Tuple, Dict
 from unittest import TestCase
 
@@ -49,6 +47,7 @@ class TestStaller(TestCase):
         staller.stall(stallable, 1, True, pi=3.4)
 
         elapsed: int = int((time.time() - start_time) * 1000)
+        print(elapsed)
 
         self.assertTrue(400 < elapsed < 500)
         self.assertEqual(8, stallable.result)
@@ -65,6 +64,7 @@ class TestStaller(TestCase):
         staller.stall(stallable, 1, True, pi=3.4)
 
         elapsed: int = int((time.time() - start_time) * 1000)
+        print(elapsed)
 
         self.assertTrue(1000 < elapsed < 1100)
         self.assertEqual(8, stallable.result)
@@ -81,6 +81,7 @@ class TestStaller(TestCase):
         staller.stall(stallable, 1, True, pi=3.4)
 
         elapsed: int = int((time.time() - start_time) * 1000)
+        print(elapsed)
 
         self.assertTrue(1000 < elapsed < 1100)
         self.assertEqual(8, stallable.result)
@@ -97,6 +98,7 @@ class TestStaller(TestCase):
         staller.stall(stallable, 1, True, pi=3.4)
 
         elapsed: int = int((time.time() - start_time) * 1000)
+        print(elapsed)
 
         self.assertTrue(400 < elapsed < 500)
         self.assertEqual(0, stallable.result)
@@ -114,6 +116,7 @@ class TestStaller(TestCase):
 
         elapsed: int = int((time.time() - start_time) * 1000)
         print(elapsed)
+
         self.assertTrue(1000 < elapsed < 1100)
         self.assertEqual(8, stallable.result)
         self.assertEqual((1, True), stallable.args)
