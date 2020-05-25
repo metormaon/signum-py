@@ -1,7 +1,5 @@
-import binascii
 import secrets
 import hashlib
-import sys
 
 
 def generate_random_base_64(length_in_bytes: object = 20) -> str:
@@ -28,4 +26,3 @@ def validate_hashcash_zeros(hashcash: bytes, zero_count: int) -> bool:
     except Exception as e:
         print(e)
         return False
-
