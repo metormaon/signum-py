@@ -16,14 +16,14 @@ class TestAuthenticationValidator(TestCase):
         self.request_details = {}
         self.headers = {}
         self.state_encryptor = Mock(spec=StateEncryptor)
-        self.password_repository = Mock(spec=PasswordRepository)
+        # self.password_repository = Mock(spec=PasswordRepository)
         self.configuration = {}
         self.validator = AuthenticationValidator
 
     def validate(self):
         return self.validator.validate(request_details=self.request_details, headers=self.headers,
                                        state_encryptor=self.state_encryptor,
-                                       password_database=self.password_repository,
+                                       # password_database=self.password_repository,
                                        configuration=self.configuration)
 
     def expect_failure(self, stage, reason):
@@ -51,11 +51,11 @@ class TestAuthenticationValidator(TestCase):
         self.expect_failure("body", "not provided")
         self.request_details["body"] = "state"
 
-        self.expect_failure("username", "not provided")
-        self.headers["X-Username"] = "Yossi"
-
-        self.expect_failure("password", "not provided")
-        self.headers["X-hashed-Passtext"] = "e0d123e5f316bef78bfdf5a008837577"
+        # self.expect_failure("username", "not provided")
+        # self.headers["X-Username"] = "Yossi"
+        #
+        # self.expect_failure("password", "not provided")
+        # self.headers["X-hashed-Passtext"] = "e0d123e5f316bef78bfdf5a008837577"
 
         self.expect_failure("csrf", "not provided")
         self.headers["X-Csrf-Token"] = "csrf_token"
@@ -138,16 +138,16 @@ class TestAuthenticationValidator(TestCase):
         self.expect_failure("captcha", "captcha solution isn't in {'zooka'}")
         state["captcha_solutions"] = ["gremlin", "gremlins"]
 
-        self.password_repository.validate_password.return_value = (False, "Not found")
-
-        self.expect_failure("username-password", "Not found")
-        self.password_repository.validate_password.return_value = (False, "No match")
-
-        self.expect_failure("username-password", "No match")
-        self.password_repository.validate_password.return_value = (True, "Match")
+        # self.password_repository.validate_password.return_value = (False, "Not found")
+        #
+        # self.expect_failure("username-password", "Not found")
+        # self.password_repository.validate_password.return_value = (False, "No match")
+        #
+        # self.expect_failure("username-password", "No match")
+        # self.password_repository.validate_password.return_value = (True, "Match")
 
         passed, response = self.validate()
 
         self.assertTrue(passed)
         self.assertTrue(response["visible_response"]["passed"])
-        self.assertLess(10, len(response["visible_response"]["session_key"]))
+        # self.assertLess(10, len(response["visible_response"]["session_key"]))

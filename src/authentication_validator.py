@@ -3,15 +3,16 @@ import json
 from json import JSONDecodeError
 from typing import Tuple, Dict, List, Union
 
-from src import util
 from src.password_repository import PasswordRepository
 from src.state import StateEncryptor
+from src.util import generate_random_base_64, validate_hashcash_zeros
 
 
 class AuthenticationValidator:
     @classmethod
     def validate(cls, request_details: Dict[str, str], headers: Dict[str, str], state_encryptor: StateEncryptor,
-                 password_database: PasswordRepository, configuration: Dict[str, Union[str, List[str]]]) -> \
+                 # password_database: PasswordRepository,
+                 configuration: Dict[str, Union[str, List[str]]]) -> \
             Tuple[bool, object]:
         try:
             # ### Early tests - fast failure ### #
@@ -43,17 +44,17 @@ class AuthenticationValidator:
             if not body:
                 return cls.failure("body", "not provided")
 
-            username = headers.get("X-Username")
-
-            # Fail on missing username
-            if not username:
-                return cls.failure("username", "not provided")
-
-            password = headers.get("X-hashed-Passtext")
-
-            # Fail on missing username
-            if not password:
-                return cls.failure("password", "not provided")
+            # username = headers.get("X-Username")
+            #
+            # # Fail on missing username
+            # if not username:
+            #     return cls.failure("username", "not provided")
+            #
+            # password = headers.get("X-hashed-Passtext")
+            #
+            # # Fail on missing username
+            # if not password:
+            #     return cls.failure("password", "not provided")
 
             csrf = headers.get("X-Csrf-Token")
 
@@ -146,17 +147,17 @@ class AuthenticationValidator:
             if captcha not in captcha_solutions:
                 return cls.failure("captcha", f"captcha solution isn't in {captcha_solutions}")
 
-            # Verify username-password
-            passed, reason = password_database.validate_password(username=username, password=password)
-
-            if not passed:
-                return cls.failure("username-password", reason)
+            # # Verify username-password
+            # passed, reason = password_database.validate_password(username=username, password=password)
+            #
+            # if not passed:
+            #     return cls.failure("username-password", reason)
 
             # PASSED!!!!
             return True, {
                 "visible_response": {
                     "passed": True,
-                    "session_key": util.generate_random_base_64(40)
+                    # "session_key": generate_random_base_64(40)
                 }
             }
 
@@ -166,7 +167,7 @@ class AuthenticationValidator:
 
     @staticmethod
     def validate_hashcash(hashcash: bytes, zero_count: int):
-        return util.validate_hashcash_zeros(hashcash, zero_count)
+        return validate_hashcash_zeros(hashcash, zero_count)
 
     @staticmethod
     def failure(failure_stage: str, failure_reason: str):
