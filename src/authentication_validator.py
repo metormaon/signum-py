@@ -3,9 +3,8 @@ import json
 from json import JSONDecodeError
 from typing import Tuple, Dict, List, Union
 
-from src.password_repository import PasswordRepository
 from src.state import StateEncryptor
-from src.util import generate_random_base_64, validate_hashcash_zeros
+from src.util import validate_hashcash_zeros
 
 
 class AuthenticationValidator:
