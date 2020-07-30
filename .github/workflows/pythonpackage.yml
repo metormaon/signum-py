@@ -18,18 +18,6 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
-    - name: Test with pytest
-      run: |
-        pip install pytest
-        pytest
-
-    - name: Find and Replace
-      uses: jacobtomlinson/gha-find-replace@master
-      with:
-        find: "from src."
-        replace: "from signum."
-        include: "src/*.py"
-
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -48,6 +36,17 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+    - name: Test with pytest
+      run: |
+        pip install pytest
+        pytest
+
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@master
+      with:
+        find: "from src."
+        replace: "from signum."
+        include: "src/*.py"
 
 #    - name: Packaging
 #      run: |

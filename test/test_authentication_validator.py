@@ -2,7 +2,6 @@ from unittest import TestCase
 from unittest.mock import Mock
 
 from src.authentication_validator import AuthenticationValidator
-from src.password_repository import PasswordRepository
 from src.state import StateEncryptor
 
 
