@@ -3,8 +3,8 @@ import json
 from json import JSONDecodeError
 from typing import Tuple, Dict, List, Union
 
-from src.state import StateEncryptor
-from src.util import validate_hashcash_zeros
+from .state import StateEncryptor
+from .util import validate_hashcash_zeros
 
 
 class AuthenticationValidator:
