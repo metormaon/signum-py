@@ -35,7 +35,7 @@ class Preparer:
                 }},
                 "hashcash": {{
                     "require": true,
-                    "zeroCount": {int(configuration["hashcash_zero_count"])}",
+                    "zeroCount": {int(configuration["hashcash_zero_count"])},
                     "serverString": "{hashcash_server_string}"
                 }},
                 "csrfToken": {{
