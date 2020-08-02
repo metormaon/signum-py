@@ -1,14 +1,12 @@
 from datetime import datetime
-from typing import Dict, Union, List, Set
+from typing import Dict, Union, List, Set, Any
 
 from . import StateEncryptor, captcha, util
 
 
 class Preparer:
-    DiverseDict = Dict[str, Union[str, List[str], Set[str]]]
-
     @staticmethod
-    def prepare_authentication(state_encryptor: StateEncryptor, configuration: DiverseDict) -> DiverseDict:
+    def prepare_authentication(state_encryptor: StateEncryptor, configuration: Dict[str, Any]) -> Dict[str, Any]:
         captcha_url: str
         captcha_solution: Set[str]
 
@@ -27,7 +25,7 @@ class Preparer:
             }
         }
 
-        transaction_details: Preparer.DiverseDict = {
+        transaction_details: Dict[str, Any] = {
             "captcha": captcha_url,
             "server-instructions": f"""{{
                 "captcha": {{
@@ -59,5 +57,8 @@ class Preparer:
                 "minimumAlphabetPassphrase": {int(configuration["passphrase_minimum_length"])}
             }}"""
         }
+
+        if configuration["SIGNUM_TEST_MODE"]:
+            transaction_details["unencrypted_state"] = state
 
         return transaction_details
