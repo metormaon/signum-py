@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 from typing import Dict, Set, Any
 
@@ -17,7 +18,7 @@ class Preparer:
 
         state = {
             "server_time": datetime.utcnow().strftime("%Y%m%d-%H%M%S"),
-            "captcha_solutions": captcha_solutions,
+            "captcha_solutions": list(captcha_solutions),
             "csrf_token": csrf_token,
             "hashcash": {
                 "server_string": hashcash_server_string,
@@ -59,6 +60,6 @@ class Preparer:
         }
 
         if configuration["SIGNUM_TEST_MODE"]:
-            transaction_details["unencrypted_state"] = state
+            transaction_details["unencrypted_state"] = json.dumps(state)
 
         return transaction_details
