@@ -60,6 +60,6 @@ class Preparer:
         }
 
         if configuration["SIGNUM_TEST_MODE"]:
-            transaction_details["unencrypted_state"] = json.dumps(state)
+            transaction_details["unencrypted_state"] = state
 
         return transaction_details
