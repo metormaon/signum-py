@@ -31,6 +31,15 @@ class AuthenticationValidator:
             if not request_details["referrer"].startswith(acceptable_referrer):
                 return cls.failure("referrer", "doesn't match")
 
+            requested_with = headers.get("X-Requested-With")
+
+            # We require X-Requested-With: XmlHttpRequest
+            if not requested_with:
+                return cls.failure("requested_with", "not provided")
+
+            if not requested_with == "XmlHttpRequest":
+                return cls.failure("requested_with", "not XmlHttpRequest")
+
             remote_address = request_details.get("remote_addr")
 
             # Fail on missing remote address
@@ -42,18 +51,6 @@ class AuthenticationValidator:
             # Fail on missing body
             if not body:
                 return cls.failure("body", "not provided")
-
-            # username = headers.get("X-Username")
-            #
-            # # Fail on missing username
-            # if not username:
-            #     return cls.failure("username", "not provided")
-            #
-            # password = headers.get("X-hashed-Passtext")
-            #
-            # # Fail on missing username
-            # if not password:
-            #     return cls.failure("password", "not provided")
 
             csrf = headers.get("X-Csrf-Token")
 
@@ -146,17 +143,9 @@ class AuthenticationValidator:
             if captcha not in captcha_solutions:
                 return cls.failure("captcha", f"captcha solution isn't in {captcha_solutions}")
 
-            # # Verify username-password
-            # passed, reason = password_database.validate_password(username=username, password=password)
-            #
-            # if not passed:
-            #     return cls.failure("username-password", reason)
-
-            # PASSED!!!!
             return True, {
                 "visible_response": {
                     "passed": True,
-                    # "session_key": generate_random_base_64(40)
                 }
             }
 
