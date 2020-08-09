@@ -42,6 +42,12 @@ class TestAuthenticationValidator(TestCase):
         self.expect_failure("referrer", "doesn't match")
         self.request_details["host"] = "www.host1.com"
 
+        self.expect_failure("requested_with", "not provided")
+        self.headers["X-Requested-With"] = "the browser"
+
+        self.expect_failure("requested_with", "not XmlHttpRequest")
+        self.headers["X-Requested-With"] = "XmlHttpRequest"
+
         self.expect_failure("remote_address", "not provided")
         self.request_details["remote_addr"] = "135.136.137.138"
 
